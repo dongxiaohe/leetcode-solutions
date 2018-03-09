@@ -12,7 +12,8 @@ const toNumber = (node) => {
 }
 
 const addTwoNumbers = (l1, l2) => {
-    return toNumber(l1) + toNumber(l2);
+    const total = toNumber(l1) + toNumber(l2);
+	return [...total + ""].map(t => +t);
 }
 
 const l1_3 = linkedNode(3);
