@@ -1,38 +1,29 @@
 const threeSumCloset = (nums, target) => {
 	const sortedNums = nums.sort((a, b) => a - b);
 	const len = sortedNums.length;
-	let result = {
-		closet: null, 
-		distance: null
-	};
-
-	for (let i = 0; i < len; i++) {
+	let result = null;
+	
+	for (let i = 0; i < len; i++ ) {
 		let j = i + 1;
-		let end = len - 1;
-
-		while(j < end) {
-				let tmpTotal = sortedNums[i] + sortedNums[j] + sortedNums[end];
-				let tmpDistance = target - tmpTotal;
-				if (tmpDistance === target) {
-					return [sortedNums[i], sortedNums[j], sortedNums[end]];
-				}
-				if (!result.closet) {
-					result.closet = [sortedNums[i], sortedNums[j], sortedNums[end]];
-					result.distance = tmpDistance; 
-					continue;
-				} 
-				if (Math.abs(tmpDistance) < result.distance) {
-					result.closet = [sortedNums[i], sortedNums[j], sortedNums[end]];
-					result.distance = Math.abs(tmpDistance);
-				} 
-				if (result.distance < 0) {
-					j++;		
-				} else {
-					end--;
-				}
+		let k = len - 1;
+		while (j < k) {
+			const total = sortedNums[i] + sortedNums[j] + sortedNums[k];
+			if (total === target) return target;
+			if (!result) {
+				result = total;
+				continue;
+			}
+			if (Math.abs(total - target) < Math.abs(result - target)) {
+				result = total;
+			}
+			if (total > target) {
+				k--;
+			} else {
+				j++;
+			}
 		}
-	}
-	return result.closet;
+	}	
+	return result;
 }
 
 console.log(threeSumCloset([-1, 2, 1, -4], 1));
