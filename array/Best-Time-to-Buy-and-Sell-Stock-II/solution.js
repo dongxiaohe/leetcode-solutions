@@ -3,17 +3,18 @@ const maxProfit = prices => {
 	const len = prices.length;
 	let i = len - 1, j = len - 2;
 	let profit = 0;
+	let tmpProfit;
 	while (i >= 0) {
-		//console.log(prices[i], prices[j]);
-		if (prices[i] <= prices[j]) {
+		tmpProfit = prices[i] - prices[j];
+		if (tmpProfit <= 0) {
 			result += profit;
 			if (j === 0) {
 				return result;
 			}
 			profit = 0;
 			i = j;
-		} else if ((prices[i] - prices[j]) > profit) {
-			profit = prices[i] - prices[j];
+		} else if (tmpProfit > profit) {
+			profit = tmpProfit;
 		} else {
 			result += profit;
 			profit = 0;
